@@ -97,7 +97,7 @@ namespace SevenMod.Plugin.BloodMoon
         /// <returns>The number of days between today and the next blood moon.</returns>
         private int GetDays()
         {
-            return this.interval.AsInt - (GameUtils.WorldTimeToDays(GameManager.Instance.World.GetWorldTime()) % this.interval.AsInt);
+            return (this.interval.AsInt - GameUtils.WorldTimeToDays(GameManager.Instance.World.GetWorldTime())) % this.interval.AsInt;
         }
     }
 }
