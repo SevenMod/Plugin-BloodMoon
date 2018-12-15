@@ -42,7 +42,7 @@ namespace SevenMod.Plugin.BloodMoon
 
             this.AutoExecConfig(true, "BloodMoon");
 
-            this.RegAdminCmd("bloodmoon", 0, "Show the number of days until the next blood moon.").Executed += this.OnBloodMoonExecuted;
+            this.RegAdminCmd("bloodmoon", 0, "Show the number of days until the next blood moon.").Executed += this.OnBloodMoonCommandExecuted;
         }
 
         /// <inheritdoc/>
@@ -59,7 +59,7 @@ namespace SevenMod.Plugin.BloodMoon
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An <see cref="AdminCommandEventArgs"/> object containing the event data.</param>
-        private void OnBloodMoonExecuted(object sender, AdminCommandEventArgs e)
+        private void OnBloodMoonCommandExecuted(object sender, AdminCommandEventArgs e)
         {
             var message = this.GetMessage();
             if (!this.ShouldReplyToChat(e.Client))
