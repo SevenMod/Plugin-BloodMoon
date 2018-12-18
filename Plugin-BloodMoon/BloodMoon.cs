@@ -77,17 +77,17 @@ namespace SevenMod.Plugin.BloodMoon
         private string GetMessage()
         {
             var days = this.GetDays();
-            if (days == 1)
+            if (days == 7)
+            {
+                return "The next blood moon is [b]tonight[b]!";
+            }
+            else if (days == 1)
             {
                 return "There is [b]1[/b] day until the next blood moon.";
             }
-            else if (days > 0)
-            {
-                return $"There are [b]{days}[/b] days until the next blood moon.";
-            }
             else
             {
-                return "The next blood moon is [b]tonight[b]!";
+                return $"There are [b]{days}[/b] days until the next blood moon.";
             }
         }
 
