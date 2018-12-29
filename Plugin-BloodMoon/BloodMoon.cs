@@ -37,20 +37,23 @@ namespace SevenMod.Plugin.BloodMoon
         /// <inheritdoc/>
         public override void OnLoadPlugin()
         {
+            this.LoadTranslations("BloodMoon.Plugin");
+
             this.interval = this.CreateConVar("BloodMoonInterval", "7", "The number of days between blood moons.", true, 1).Value;
             this.showOnSpawn = this.CreateConVar("BloodMoonShowOnSpawn", "True", "Whether to show the number of days until the next blood moon to newly spawned players.").Value;
 
             this.AutoExecConfig(true, "BloodMoon");
 
-            this.RegAdminCmd("bloodmoon", 0, "Show the number of days until the next blood moon.").Executed += this.OnBloodmoonCommandExecuted;
+            this.RegAdminCmd("bloodmoon", 0, "Bloodmoon Description").Executed += this.OnBloodmoonCommandExecuted;
         }
 
         /// <inheritdoc/>
         public override void OnPlayerSpawnedInWorld(SMClient client, SMRespawnType respawnReason, Pos pos)
         {
+            var days = this.GetDays();
             if (this.showOnSpawn.AsBool)
             {
-                this.PrintToChat(client, this.GetMessage());
+                this.PrintToChat(client, this.GetMessage(days), days);
             }
         }
 
@@ -61,33 +64,34 @@ namespace SevenMod.Plugin.BloodMoon
         /// <param name="e">An <see cref="AdminCommandEventArgs"/> object containing the event data.</param>
         private void OnBloodmoonCommandExecuted(object sender, AdminCommandEventArgs e)
         {
-            var message = this.GetMessage();
+            var days = this.GetDays();
+            var message = this.GetMessage(days);
             if (!this.ShouldReplyToChat(e.Client))
             {
-                this.ReplyToCommand(e.Client, message);
+                this.ReplyToCommand(e.Client, message, days);
             }
 
-            this.PrintToChatAll(message);
+            this.PrintToChatAll(message, days);
         }
 
         /// <summary>
         /// Gets a formatted string describing the number of days until the next blood moon.
         /// </summary>
+        /// <param name="days">The number of days until the next blood moon.</param>
         /// <returns>The formatted string.</returns>
-        private string GetMessage()
+        private string GetMessage(int days)
         {
-            var days = this.GetDays();
             if (days == 7)
             {
-                return "The next blood moon is [b]tonight[b]!";
+                return "Bloodmoon Tonight";
             }
             else if (days == 1)
             {
-                return "There is [b]1[/b] day until the next blood moon.";
+                return "Bloodmoon One";
             }
             else
             {
-                return $"There are [b]{days}[/b] days until the next blood moon.";
+                return "Bloodmoon";
             }
         }
 

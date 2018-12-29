@@ -59,6 +59,12 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Translations\BloodMoon.Plugin.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
@@ -68,7 +74,10 @@
     <PostBuildEvent>
 rmdir "$(ProjectDir)..\bin" /s /q
 mkdir "$(ProjectDir)..\bin\Plugins"
+mkdir "$(ProjectDir)..\bin\Translations"
 copy "$(ProjectDir)$(OutDir)Plugin.BloodMoon.dll" "$(ProjectDir)..\bin\Plugins\BloodMoon.dll"
+xcopy "$(ProjectDir)$(OutDir)Translations" "$(ProjectDir)..\bin\Translations" /e /y /i /c
+
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
