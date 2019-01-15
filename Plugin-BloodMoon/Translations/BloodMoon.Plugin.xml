@@ -5,12 +5,12 @@
   </Phrase>
   <Phrase Name="Bloodmoon">
     <Format>{1:d}</Format>
-    <en>There are {1} days until the next blood moon.</en>
+    <en>[ORANGE]There are {1} days until the next blood moon.[-]</en>
   </Phrase>
   <Phrase Name="Bloodmoon One">
-    <en>There is 1 day until the next blood moon.</en>
+    <en>[ORANGE]There is 1 day until the next blood moon.[-]</en>
   </Phrase>
   <Phrase Name="Bloodmoon Tonight">
-    <en>The next blood moon is tonight!</en>
+    <en>[ORANGE]The next blood moon is tonight![-]</en>
   </Phrase>
 </Phrases>
